@@ -25,7 +25,10 @@ SECRET_KEY = "django-insecure-gs0#)hv%!5%shplfwtl9=pa-ub#%n@(@_b(en=04lgr!#@ep%y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*', 'didactic-telegram-r4gxq4jpqgprhxx9r-8000.app.github.dev']
+
+# Codespace URL for API endpoints
+CODESPACE_URL = 'https://didactic-telegram-r4gxq4jpqgprhxx9r-8000.app.github.dev'
 
 
 # Application definition

@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.conf import settings
 from .models import User, Team, Activity, Leaderboard, Workout
 from .serializers import UserSerializer, TeamSerializer, ActivitySerializer, LeaderboardSerializer, WorkoutSerializer
 
@@ -8,7 +9,7 @@ from .serializers import UserSerializer, TeamSerializer, ActivitySerializer, Lea
 def api_root(request, format=None):
     # Using both codespace URL and local URL for flexibility
     if 'github.dev' in request.get_host() or 'githubpreview.dev' in request.get_host():
-        base_url = 'https://didactic-telegram-r4gxq4jpqgprhxx9r-8000.app.github.dev'
+        base_url = settings.CODESPACE_URL
     else:
         base_url = request.build_absolute_uri('/')[:-1]
     
