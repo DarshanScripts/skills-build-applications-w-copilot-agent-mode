@@ -6,7 +6,12 @@ from .serializers import UserSerializer, TeamSerializer, ActivitySerializer, Lea
 
 @api_view(['GET'])
 def api_root(request, format=None):
-    base_url = request.build_absolute_uri('/')[:-1]
+    # Using both codespace URL and local URL for flexibility
+    if 'github.dev' in request.get_host() or 'githubpreview.dev' in request.get_host():
+        base_url = 'https://didactic-telegram-r4gxq4jpqgprhxx9r-8000.app.github.dev'
+    else:
+        base_url = request.build_absolute_uri('/')[:-1]
+    
     return Response({
         'users': f'{base_url}/api/users/',
         'teams': f'{base_url}/api/teams/',
