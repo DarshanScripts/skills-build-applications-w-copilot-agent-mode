@@ -25,32 +25,86 @@ function Activities() {
       });
   }, []);
 
-  if (loading) return <div className="text-center my-5"><div className="spinner-border" role="status"><span className="visually-hidden">Loading...</span></div></div>;
-  if (error) return <div className="alert alert-danger my-3" role="alert">Error: {error}</div>;
+  if (loading) return (
+    <div className="text-center my-5">
+      <div className="spinner-border text-primary" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+      <p className="mt-2">Loading activities...</p>
+    </div>
+  );
+  
+  if (error) return (
+    <div className="alert alert-danger shadow-sm my-3" role="alert">
+      <h4 className="alert-heading"><i className="bi bi-exclamation-triangle-fill me-2"></i> Error</h4>
+      <p>{error}</p>
+    </div>
+  );
 
   return (
-    <div className="container mt-4">
-      <h2>Activities</h2>
-      <div className="row">
-        {activities.length > 0 ? (
-          activities.map(activity => (
-            <div className="col-md-4 mb-4" key={activity.id}>
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title">{activity.activity_type}</h5>
-                  <p className="card-text">Duration: {activity.duration}</p>
-                  <p className="card-text">User: {activity.user}</p>
-                </div>
-              </div>
-            </div>
-          ))
-        ) : (
-          <div className="col-12">
-            <p>No activities found. Start tracking your fitness activities!</p>
-            <button className="btn btn-primary">Add Activity</button>
-          </div>
-        )}
+    <div className="container mt-4 fade-in">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="mb-0"><i className="bi bi-activity me-2"></i>Activities</h2>
+        <button className="btn btn-primary">
+          <i className="bi bi-plus-circle me-2"></i>Add New Activity
+        </button>
       </div>
+      
+      {activities.length > 0 ? (
+        <div className="card shadow-sm">
+          <div className="card-body">
+            <div className="table-responsive">
+              <table className="table table-hover">
+                <thead className="table-primary">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {activities.map((activity, index) => (
+                    <tr key={activity.id || index}>
+                      <th scope="row">{index + 1}</th>
+                      <td>
+                        <span className="badge bg-primary">{activity.activity_type}</span>
+                      </td>
+                      <td>{activity.duration}</td>
+                      <td>{typeof activity.user === 'object' ? activity.user.username : activity.user}</td>
+                      <td>
+                        <div className="btn-group btn-group-sm">
+                          <button className="btn btn-outline-primary">
+                            <i className="bi bi-eye"></i>
+                          </button>
+                          <button className="btn btn-outline-success">
+                            <i className="bi bi-pencil"></i>
+                          </button>
+                          <button className="btn btn-outline-danger">
+                            <i className="bi bi-trash"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="card shadow-sm text-center p-5">
+          <div className="card-body">
+            <i className="bi bi-activity display-1 text-muted mb-3"></i>
+            <h3>No Activities Found</h3>
+            <p className="text-muted mb-4">Start tracking your fitness activities!</p>
+            <button className="btn btn-lg btn-primary">
+              <i className="bi bi-plus-circle me-2"></i>Add Your First Activity
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

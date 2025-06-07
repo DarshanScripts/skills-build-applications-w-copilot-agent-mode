@@ -64,76 +64,133 @@ function Register() {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 fade-in">
       <div className="row justify-content-center">
-        <div className="col-md-6">
-          <div className="card">
-            <div className="card-header bg-primary text-white">
-              <h3 className="mb-0">Register for OctoFit Tracker</h3>
+        <div className="col-md-8">
+          <div className="card shadow">
+            <div className="card-header bg-primary text-white text-center py-3">
+              <h3 className="mb-0">
+                <i className="bi bi-person-plus me-2"></i>
+                Register for OctoFit Tracker
+              </h3>
             </div>
-            <div className="card-body">
-              {error && <div className="alert alert-danger">{error}</div>}
+            <div className="card-body p-4">
+              {error && (
+                <div className="alert alert-danger d-flex align-items-center" role="alert">
+                  <i className="bi bi-exclamation-triangle-fill me-2"></i>
+                  <div>{error}</div>
+                </div>
+              )}
+              
               <form onSubmit={handleSubmit}>
                 {loading && (
-                  <div className="text-center mb-4">
+                  <div className="text-center my-4">
                     <div className="spinner-border text-primary" role="status">
                       <span className="visually-hidden">Loading...</span>
                     </div>
+                    <p className="text-muted mt-2">Creating your account...</p>
                   </div>
                 )}
-                <div className="mb-3">
-                  <label htmlFor="username" className="form-label">Username</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleChange}
-                    required
-                  />
+                
+                <div className="row mb-3">
+                  <div className="col-md-6">
+                    <div className="form-floating mb-3 mb-md-0">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="username"
+                        placeholder="Username"
+                        name="username"
+                        value={formData.username}
+                        onChange={handleChange}
+                        required
+                        disabled={loading}
+                      />
+                      <label htmlFor="username">Username</label>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-floating">
+                      <input
+                        type="email"
+                        className="form-control"
+                        id="email"
+                        placeholder="Email address"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        disabled={loading}
+                      />
+                      <label htmlFor="email">Email address</label>
+                    </div>
+                  </div>
                 </div>
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email address</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
+                
+                <div className="row mb-3">
+                  <div className="col-md-6">
+                    <div className="form-floating mb-3 mb-md-0">
+                      <input
+                        type="password"
+                        className="form-control"
+                        id="password"
+                        placeholder="Password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        required
+                        disabled={loading}
+                      />
+                      <label htmlFor="password">Password</label>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-floating">
+                      <input
+                        type="password"
+                        className="form-control"
+                        id="confirmPassword"
+                        placeholder="Confirm Password"
+                        name="confirmPassword"
+                        value={formData.confirmPassword}
+                        onChange={handleChange}
+                        required
+                        disabled={loading}
+                      />
+                      <label htmlFor="confirmPassword">Confirm Password</label>
+                    </div>
+                  </div>
                 </div>
-                <div className="mb-3">
-                  <label htmlFor="password" className="form-label">Password</label>
+                
+                <div className="form-check mb-4">
                   <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
+                    className="form-check-input"
+                    type="checkbox"
+                    id="agreeTerms"
                     required
+                    disabled={loading}
                   />
+                  <label className="form-check-label" htmlFor="agreeTerms">
+                    I agree to the <a href="#" className="text-primary">Terms of Service</a> and <a href="#" className="text-primary">Privacy Policy</a>
+                  </label>
                 </div>
-                <div className="mb-3">
-                  <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <button type="submit" className="btn btn-primary w-100">Register</button>
+                
+                <button 
+                  type="submit" 
+                  className="btn btn-primary w-100 py-2"
+                  disabled={loading}
+                >
+                  <i className="bi bi-person-plus me-2"></i>
+                  Create Account
+                </button>
               </form>
-              <div className="mt-3 text-center">
-                <p>Already have an account? <a href="/login">Login</a></p>
+              
+              <div className="mt-4 text-center">
+                <p className="mb-0">Already have an account? <Link to="/login" className="text-primary fw-bold">Login</Link></p>
               </div>
+            </div>
+            <div className="card-footer bg-light text-center py-3">
+              <div className="small text-muted">Join our community of fitness enthusiasts at Mergington High School</div>
             </div>
           </div>
         </div>
